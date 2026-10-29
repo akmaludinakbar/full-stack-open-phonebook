@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: fso-phonebook-backend
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run deploy:build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 24.1.0
+      - key: MONGODB_URI
+        sync: false

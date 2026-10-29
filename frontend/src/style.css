@@ -1,0 +1,16 @@
+body {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  margin: 2rem;
+}
+
+main {
+  max-width: 44rem;
+}
+label { display: inline-block; margin: 0.35rem 0; }
+button { margin-left: 0.4rem; }
+ul { padding-left: 1.3rem; }
+li { margin: 0.35rem 0; }
+.notification { border: 2px solid; border-radius: 0.3rem; padding: 0.6rem; }
+.notification.success { color: #146b38; background: #e8f7ed; }
+.notification.error { color: #a32626; background: #fff0f0; }
