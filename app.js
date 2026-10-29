@@ -1,18 +1,48 @@
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
+import mongoose from 'mongoose'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import Person from './models/person.js'
 
 const app = express()
 const directory = dirname(fileURLToPath(import.meta.url))
+let databaseReady
+
+function initializeDatabase() {
+  databaseReady ??= (async () => {
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(process.env.MONGODB_URI)
+    }
+    await Person.init()
+  })().catch(async () => {
+    try {
+      // Closing also clears Mongoose's cached model initialization failure.
+      await mongoose.connection.close()
+    } finally {
+      databaseReady = undefined
+    }
+    throw new Error('Database unavailable')
+  })
+  return databaseReady
+}
 
 app.use(cors())
 app.use(express.json())
 morgan.token('post-body', request => request.method === 'POST' ? JSON.stringify(request.body) : '')
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :post-body'))
 app.use(express.static(join(directory, 'dist')))
+
+app.use(['/api', '/info'], async (_request, response, next) => {
+  try {
+    await initializeDatabase()
+    next()
+  } catch {
+    response.status(503).json({ error: 'Database unavailable' })
+  }
+})
 
 app.get('/api/persons', async (_request, response, next) => {
   try {

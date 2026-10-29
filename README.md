@@ -43,6 +43,8 @@ The CLI accepts a direct `MONGODB_URI` instead for a local temporary database; i
 
 The `Dockerfile` builds the frontend and runs the backend with Node 24. `render.yaml` provides a free Render web-service blueprint. Set the private `MONGODB_URI` environment variable on the host; the server reads the host-provided `PORT`. Deploy only this backend directory as the repository root, with the copied `frontend/` source included. No cloud account, Atlas cluster, public URL, or live deployment is included in this repository.
 
+For Vercel, import this backend directory as an Express project with Node 24 and leave the output-directory override unset. `vercel.json` selects `npm run build:vercel`, which builds the frontend into both `dist/` for local/Docker use and `public/` for Vercel's static hosting. Configure the private `MONGODB_URI` runtime variable; leave `VITE_API_URL` unset for same-origin API requests. The exported Express app initializes MongoDB and its unique-name index before handling `/api` or `/info` requests, reuses that initialization, and returns a generic 503 if setup fails so a later request can retry. Public deployment and live verification remain separate steps.
+
 ## Exercise status
 
 | Exercise | Local status |

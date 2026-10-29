@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "build:frontend": "npm --prefix frontend ci && npm --prefix frontend run build && node scripts/copy-frontend.js",
     "deploy:build": "npm run build:frontend",
+    "build:vercel": "npm run deploy:build && node scripts/copy-frontend.js public",
     "demo": "node scripts/local-demo.js"
   },
   "dependencies": {
