@@ -37,7 +37,7 @@ node mongo.js '<password>'
 node mongo.js '<password>' 'Ada Lovelace' '12-345678'
 ```
 
-The CLI accepts a direct `MONGODB_URI` instead for a local temporary database; in that mode the required password argument is unused. It does not print the URI or password. Command-line arguments may be visible to other local processes, so do not use a shared machine for a real password.
+The CLI also accepts a direct `MONGODB_URI` from a private environment variable; in that mode the required password argument is unused. This path supports temporary local MongoDB or Atlas without putting the real password in process arguments. It does not print the URI or password. Command-line arguments may be visible to other local processes, so do not use a shared machine for a real password.
 
 ## Deployment
 
@@ -55,12 +55,12 @@ Live application: [Phonebook](https://full-stack-open-phonebook-ruddy.vercel.app
 | 3.9 | Copied Part 2 frontend connected to `/api/persons`; adding a contact and loading it again after a browser reload verified against temporary local MongoDB. |
 | 3.10 | Vercel Production deployment and anonymous live API read verified. |
 | 3.11 | Compiled frontend and same-origin API verified on the live Production URL. |
-| 3.12 | CLI verified against temporary MongoDB. Atlas account/cluster and deployed-app connection are verified; running the exercise CLI against Atlas remains pending. |
+| 3.12 | Existing `mongo.js` added and listed a unique synthetic contact against the real Atlas database on 30 October 2026; exact test contact removed afterward. URI supplied through an ephemeral environment variable only; no credential file saved. |
 | 3.13–3.18 | MongoDB CRUD, update, info, and error middleware verified locally. |
 | 3.19–3.20 | Mongoose validation and frontend error display verified locally. |
 | 3.21 | Production cloud build, frontend/API, browser create/reload persistence, and API update/delete verified; synthetic contact removed. |
 | 3.22 | ESLint configured and checked. |
 
-This implementation was prepared with AI assistance. The learner must review the exercises, complete the remaining Atlas CLI verification, provide actual study hours, and decide what to submit in the course app. No exercise submission or certificate claim is made here.
+This implementation was prepared with AI assistance. On 30 October 2026, the learner reported reading the materials and reviewing the prepared work. Exercise claims and study-hour records are managed separately in the course submission app. No certificate claim is made here.
 
 Course sources: [Node.js and Express](https://fullstackopen.com/en/part3/node_js_and_express/), [Deploying app to internet](https://fullstackopen.com/en/part3/deploying_app_to_internet/), [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db/), [Validation and ESLint](https://fullstackopen.com/en/part3/validation_and_es_lint/).
