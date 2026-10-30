@@ -61,6 +61,6 @@ Live application: [Phonebook](https://full-stack-open-phonebook-ruddy.vercel.app
 | 3.21 | Production cloud build, frontend/API, browser create/reload persistence, and API update/delete verified; synthetic contact removed. |
 | 3.22 | ESLint configured and checked. |
 
-This implementation was prepared with AI assistance. On 30 October 2026, the learner reported reading the materials and reviewing the prepared work. Exercise claims and study-hour records are managed separately in the course submission app. No certificate claim is made here.
+This implementation was prepared with AI assistance. On 30 October 2026, the learner reported reading the materials and reviewing the prepared work. The official course submission service accepted all 22 Part 3 exercises as part of the learner’s 97-exercise core submission and issued the English Full Stack Open Certificate of Completion with grade 3 on 30 October 2026. No university-credit registration or credit-exam completion is claimed.
 
 Course sources: [Node.js and Express](https://fullstackopen.com/en/part3/node_js_and_express/), [Deploying app to internet](https://fullstackopen.com/en/part3/deploying_app_to_internet/), [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db/), [Validation and ESLint](https://fullstackopen.com/en/part3/validation_and_es_lint/).
