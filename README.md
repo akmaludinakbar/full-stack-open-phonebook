@@ -39,26 +39,28 @@ node mongo.js '<password>' 'Ada Lovelace' '12-345678'
 
 The CLI accepts a direct `MONGODB_URI` instead for a local temporary database; in that mode the required password argument is unused. It does not print the URI or password. Command-line arguments may be visible to other local processes, so do not use a shared machine for a real password.
 
-## Deployment preparation
+## Deployment
 
-The `Dockerfile` builds the frontend and runs the backend with Node 24. `render.yaml` provides a free Render web-service blueprint. Set the private `MONGODB_URI` environment variable on the host; the server reads the host-provided `PORT`. Deploy only this backend directory as the repository root, with the copied `frontend/` source included. No cloud account, Atlas cluster, public URL, or live deployment is included in this repository.
+The `Dockerfile` builds the frontend and runs the backend with Node 24. `render.yaml` provides a free Render web-service blueprint. Set the private `MONGODB_URI` environment variable on the host; the server reads the host-provided `PORT`. Deploy only this backend directory as the repository root, with the copied `frontend/` source included. Account credentials and the database connection string are configured privately on the hosting provider and are excluded from this repository.
 
-For Vercel, import this backend directory as an Express project with Node 24 and leave the output-directory override unset. `vercel.json` selects `npm run build:vercel`, which builds the frontend into both `dist/` for local/Docker use and `public/` for Vercel's static hosting. Configure the private `MONGODB_URI` runtime variable; leave `VITE_API_URL` unset for same-origin API requests. The exported Express app initializes MongoDB and its unique-name index before handling `/api` or `/info` requests, reuses that initialization, and returns a generic 503 if setup fails so a later request can retry. Public deployment and live verification remain separate steps.
+For Vercel, import this backend directory as an Express project with Node 24 and leave the output-directory override unset. `vercel.json` selects `npm run build:vercel`, which builds the frontend into both `dist/` for local/Docker use and `public/` for Vercel's static hosting. Configure the private `MONGODB_URI` runtime variable; leave `VITE_API_URL` unset for same-origin API requests. The exported Express app initializes MongoDB and its unique-name index before handling `/api` or `/info` requests, reuses that initialization, and returns a generic 503 if setup fails so a later request can retry. The live application is hosted on Vercel Hobby and connects to MongoDB Atlas.
+
+Live application: [Phonebook](https://full-stack-open-phonebook-ruddy.vercel.app). Public API: [`/api/persons`](https://full-stack-open-phonebook-ruddy.vercel.app/api/persons). Verified on 30 October 2026: browser create/reload persistence, anonymous API read/update/delete, `/info`, and cleanup of the synthetic test contact. Deployment used the free Hobby plan without entering a card.
 
 ## Exercise status
 
-| Exercise | Local status |
+| Exercise | Technical status |
 | --- | --- |
 | 3.1–3.8 | Final server routes, request logging, POST body logging implemented and tested where applicable; earlier in-memory stages are superseded. |
 | 3.9 | Copied Part 2 frontend connected to `/api/persons`; adding a contact and loading it again after a browser reload verified against temporary local MongoDB. |
-| 3.10 | Pending public deployment and live API check. |
-| 3.11 | Local production build served by Express; pending live deployed check. |
-| 3.12 | CLI verified against temporary MongoDB; pending Atlas account, cluster, and connection. |
+| 3.10 | Vercel Production deployment and anonymous live API read verified. |
+| 3.11 | Compiled frontend and same-origin API verified on the live Production URL. |
+| 3.12 | CLI verified against temporary MongoDB. Atlas account/cluster and deployed-app connection are verified; running the exercise CLI against Atlas remains pending. |
 | 3.13–3.18 | MongoDB CRUD, update, info, and error middleware verified locally. |
 | 3.19–3.20 | Mongoose validation and frontend error display verified locally. |
-| 3.21 | Local production assets, API, component tests, and browser create/reload flow verified; cloud rebuild and live deployed check pending. |
+| 3.21 | Production cloud build, frontend/API, browser create/reload persistence, and API update/delete verified; synthetic contact removed. |
 | 3.22 | ESLint configured and checked. |
 
-This implementation was prepared with AI assistance. The learner must review the exercises, create or authorize the required accounts and deployment, verify the live application, push the final code to GitHub, and decide what to submit in the course app. No exercise submission or certificate claim is made here.
+This implementation was prepared with AI assistance. The learner must review the exercises, complete the remaining Atlas CLI verification, provide actual study hours, and decide what to submit in the course app. No exercise submission or certificate claim is made here.
 
 Course sources: [Node.js and Express](https://fullstackopen.com/en/part3/node_js_and_express/), [Deploying app to internet](https://fullstackopen.com/en/part3/deploying_app_to_internet/), [Saving data to MongoDB](https://fullstackopen.com/en/part3/saving_data_to_mongo_db/), [Validation and ESLint](https://fullstackopen.com/en/part3/validation_and_es_lint/).
